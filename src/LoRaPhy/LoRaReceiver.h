@@ -22,7 +22,7 @@
 #include "inet/physicallayer/wireless/common/radio/packetlevel/ListeningDecision.h"
 #include "inet/physicallayer/wireless/common/radio/packetlevel/ReceptionDecision.h"
 #include "inet/physicallayer/wireless/common/base/packetlevel/NarrowbandNoiseBase.h"
-#include "inet/physicallayer/wireless/common/analogmodel/packetlevel/ScalarSnir.h"
+#include "inet/physicallayer/wireless/common/analogmodel/scalar/ScalarSnir.h"
 #include "inet/physicallayer/wireless/common/base/packetlevel/FlatReceiverBase.h"
 #include "LoRaModulation.h"
 #include "LoRaTransmission.h"
@@ -92,7 +92,7 @@ public:
 
   virtual bool computeIsReceptionSuccessful(const IListening *listening, const IReception *reception, IRadioSignal::SignalPart part, const IInterference *interference, const ISnir *snir) const override;
 
-  virtual double getSNIRThreshold() const override { return snirThreshold; }
+  virtual double getSNIRThreshold() const { return snirThreshold; }
   virtual const IListening *createListening(const IRadio *radio, const simtime_t startTime, const simtime_t endTime, const Coord& startPosition, const Coord& endPosition) const override;
 
   virtual const IListeningDecision *computeListeningDecision(const IListening *listening, const IInterference *interference) const override;
