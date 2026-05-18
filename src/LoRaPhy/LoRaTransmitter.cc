@@ -14,7 +14,6 @@
 // 
 
 #include "LoRaTransmitter.h"
-#include "inet/physicallayer/wireless/common/analogmodel/packetlevel/ScalarTransmission.h"
 #include "LoRaModulation.h"
 #include "LoRaPhyPreamble_m.h"
 #include <algorithm>
