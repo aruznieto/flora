@@ -220,12 +220,12 @@ void LoRaMac::processUpperPacket()
     handleUpperMessage(packet);
 }
 
-queueing::IPassivePacketSource *LoRaMac::getProvider(cGate *gate)
+queueing::IPassivePacketSource *LoRaMac::getProvider(const cGate *gate)
 {
     return (gate->getId() == upperLayerInGateId) ? txQueue.get() : nullptr;
 }
 
-void LoRaMac::handleCanPullPacketChanged(cGate *gate)
+void LoRaMac::handleCanPullPacketChanged(const cGate *gate)
 {
     Enter_Method("handleCanPullPacketChanged");
     if (fsm.getState() == IDLE && !txQueue->isEmpty()) {
@@ -233,7 +233,7 @@ void LoRaMac::handleCanPullPacketChanged(cGate *gate)
     }
 }
 
-void LoRaMac::handlePullPacketProcessed(Packet *packet, cGate *gate, bool successful)
+void LoRaMac::handlePullPacketProcessed(Packet *packet, const cGate *gate, bool successful)
 {
     Enter_Method("handlePullPacketProcessed");
     throw cRuntimeError("Not supported callback");
