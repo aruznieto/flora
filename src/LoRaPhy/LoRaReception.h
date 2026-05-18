@@ -8,13 +8,14 @@
 #ifndef LORAPHY_LORARECEPTION_H_
 #define LORAPHY_LORARECEPTION_H_
 
-#include "inet/physicallayer/wireless/common/analogmodel/packetlevel/ScalarReception.h"
+#include "inet/physicallayer/wireless/common/base/packetlevel/ReceptionBase.h"
+#include "LoRaReceptionAnalogModel.h"
 
 using namespace inet;
 using namespace inet::physicallayer;
 namespace flora {
 
-class LoRaReception : public ScalarReception
+class LoRaReception : public ReceptionBase
 {
 protected:
     const Hz LoRaCF;
@@ -30,10 +31,10 @@ protected:
     Hz getLoRaBW() const { return LoRaBW; }
     double getLoRaCR() const { return LoRaCR; }
 
-    virtual W getPower() const override { return receivedPower; }
-    virtual W computeMinPower(simtime_t startTime, simtime_t endTime) const override;
+    W getPower() const { return receivedPower; }
+    W computeMinPower(simtime_t startTime, simtime_t endTime) const;
 };
 
-} // namespace inet
+} // namespace flora
 
 #endif /* LORAPHY_LORARECEPTION_H_ */

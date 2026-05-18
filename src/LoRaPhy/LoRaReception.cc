@@ -10,7 +10,7 @@
 namespace flora {
 
 LoRaReception::LoRaReception(const IRadio *radio, const ITransmission *transmission, const simtime_t startTime, const simtime_t endTime, const Coord startPosition, const Coord endPosition, const Quaternion startOrientation, const Quaternion endOrientation, Hz LoRaCF, Hz LoRaBW, W receivedPower, int LoRaSF, int LoRaCR) :
-        ScalarReception(radio, transmission, startTime, endTime, startPosition, endPosition, startOrientation, endOrientation, LoRaCF, LoRaBW, receivedPower),
+        ReceptionBase(radio, transmission, startTime, endTime, startPosition, endPosition, startOrientation, endOrientation, new LoRaReceptionAnalogModel(transmission->getPreambleDuration(), transmission->getHeaderDuration(), transmission->getDataDuration(), LoRaCF, LoRaBW, receivedPower, LoRaSF, LoRaCR)),
         LoRaCF(LoRaCF),
         LoRaSF(LoRaSF),
         LoRaBW(LoRaBW),
