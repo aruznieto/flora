@@ -18,7 +18,7 @@
 //#include "inet/networklayer/contract/ipv4/IPv4ControlInfo.h"
 #include "inet/networklayer/common/L3AddressTag_m.h"
 #include "inet/transportlayer/common/L4PortTag_m.h"
-#include "inet/transportlayer/contract/udp/UdpControlInfo_m.h"
+#include "inet/transportlayer/contract/udp/UdpSocket.h"
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/common/ModuleAccess.h"
 #include "inet/applications/base/ApplicationPacket_m.h"
@@ -198,16 +198,16 @@ void NetworkServerApp::updateKnownNodes(Packet* pkt)
         newNode.framesFromLastADRCommand = 0;
         newNode.numberOfSentADRPackets = 0;
         newNode.historyAllSNIR = new cOutVector;
-        newNode.historyAllSNIR->setName("Vector of SNIR per node");
+        newNode.historyAllSNIR->setName(("Vector of SNIR " + newNode.srcAddr.str()).c_str());
         //newNode.historyAllSNIR->record(pkt->getSNIR());
         newNode.historyAllSNIR->record(math::fraction2dB(frame->getSNIR()));
         newNode.historyAllRSSI = new cOutVector;
-        newNode.historyAllRSSI->setName("Vector of RSSI per node");
+        newNode.historyAllRSSI->setName(("Vector of RSSI " + newNode.srcAddr.str()).c_str());
         newNode.historyAllRSSI->record(frame->getRSSI());
         newNode.receivedSeqNumber = new cOutVector;
-        newNode.receivedSeqNumber->setName("Received Sequence number");
+        newNode.receivedSeqNumber->setName(("Received SeqNo " + newNode.srcAddr.str()).c_str());
         newNode.calculatedSNRmargin = new cOutVector;
-        newNode.calculatedSNRmargin->setName("Calculated SNRmargin in ADR");
+        newNode.calculatedSNRmargin->setName(("Calculated SNRmargin " + newNode.srcAddr.str()).c_str());
         knownNodes.push_back(newNode);
     }
 }

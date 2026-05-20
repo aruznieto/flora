@@ -16,22 +16,26 @@
 #ifndef LORAPHY_LORAANALOGMODEL_H_
 #define LORAPHY_LORAANALOGMODEL_H_
 
-#include "inet/physicallayer/wireless/common/base/packetlevel/ScalarAnalogModelBase.h"
+#include "inet/physicallayer/wireless/common/base/packetlevel/AnalogModelBase.h"
 #include "inet/physicallayer/wireless/common/radio/packetlevel/BandListening.h"
-#include "inet/physicallayer/wireless/common/analogmodel/packetlevel/ScalarNoise.h"
+#include "inet/physicallayer/wireless/common/analogmodel/scalar/ScalarNoise.h"
 
 #include "LoRaBandListening.h"
 
 namespace flora {
 
-class LoRaAnalogModel : public ScalarAnalogModelBase
+class LoRaAnalogModel : public AnalogModelBase
 {
+  protected:
+    virtual bool areOverlappingBands(Hz centerFrequency1, Hz bandwidth1, Hz centerFrequency2, Hz bandwidth2) const;
+
   public:
     const W getBackgroundNoisePower(const LoRaBandListening *listening) const;
     virtual std::ostream& printToStream(std::ostream& stream, int level, int evFlags = 0) const override;
-    virtual W computeReceptionPower(const IRadio *radio, const ITransmission *transmission, const IArrival *arrival) const override;
+    virtual W computeReceptionPower(const IRadio *radio, const ITransmission *transmission, const IArrival *arrival) const;
     virtual const IReception *computeReception(const IRadio *radio, const ITransmission *transmission, const IArrival *arrival) const override;
-    const INoise *computeNoise(const IListening *listening, const IInterference *interference) const override;
+    virtual const INoise *computeNoise(const IListening *listening, const IInterference *interference) const override;
+    virtual const INoise *computeNoise(const IReception *reception, const INoise *noise) const override;
     virtual const ISnir *computeSNIR(const IReception *reception, const INoise *noise) const override;
 };
 

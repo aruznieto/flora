@@ -86,7 +86,7 @@ class LoRaMac : public MacProtocolBase, public IMacProtocol, public queueing::IA
     IRadio::TransmissionState transmissionState = IRadio::TRANSMISSION_STATE_UNDEFINED;
     IRadio::ReceptionState receptionState = IRadio::RECEPTION_STATE_UNDEFINED;
 
-    cFSM fsm;
+    Fsm fsm;
 
     /** Remaining backoff period in seconds */
     simtime_t backoffPeriod = -1;
@@ -148,9 +148,9 @@ class LoRaMac : public MacProtocolBase, public IMacProtocol, public queueing::IA
     virtual ~LoRaMac();
     //@}
     virtual MacAddress getAddress();
-    virtual queueing::IPassivePacketSource *getProvider(cGate *gate) override;
-    virtual void handleCanPullPacketChanged(cGate *gate) override;
-    virtual void handlePullPacketProcessed(Packet *packet, cGate *gate, bool successful) override;
+    virtual queueing::IPassivePacketSource *getProvider(const cGate *gate) override;
+    virtual void handleCanPullPacketChanged(const cGate *gate) override;
+    virtual void handlePullPacketProcessed(Packet *packet, const cGate *gate, bool successful) override;
 
   protected:
     /**

@@ -28,7 +28,7 @@ import inet.applications.contract.IApp;
 import inet.transportlayer.contract.IUdp;
 import inet.networklayer.contract.IRoutingTable;
 import inet.common.MessageDispatcher;
-import inet.linklayer.ethernet.contract.IEthernetLayer;
+import inet.linklayer.contract.IEthernetLayer;
 import inet.protocolelement.contract.IProtocolLayer;
 
 module LoRaGW like INetworkNode

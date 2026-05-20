@@ -9,12 +9,12 @@
 #define LORATRANSMISSION_H_
 
 #include "inet/physicallayer/wireless/common/base/packetlevel/TransmissionBase.h"
-#include "inet/physicallayer/wireless/common/contract/packetlevel/IRadioSignal.h"
+#include "LoRaTransmissionAnalogModel.h"
 
 using namespace inet;
 using namespace inet::physicallayer;
 namespace flora {
-class LoRaTransmission : public TransmissionBase, public virtual INarrowbandSignal, public virtual IScalarSignal
+class LoRaTransmission : public TransmissionBase
 {
 protected:
     const W LoRaTP;
@@ -24,11 +24,6 @@ protected:
     const int LoRaCR;
 public:
     LoRaTransmission(const IRadio *transmitter, const Packet *macFrame, const simtime_t startTime, const simtime_t endTime, const simtime_t preambleDuration, const simtime_t headerDuration, const simtime_t dataDuration, const Coord startPosition, const Coord endPosition, const Quaternion startOrientation, const Quaternion endOrientation, W LoRaTP, Hz LoRaCF, int LoRaSF, Hz LoRaBW, int LoRaCR);
-
-    virtual Hz getCenterFrequency() const override { return LoRaCF; }
-    virtual Hz getBandwidth() const override { return LoRaBW; }
-    virtual W getPower() const override { return LoRaTP; }
-    virtual W computeMinPower(const simtime_t startTime, const simtime_t endTime) const override { return LoRaTP; }
 
     W getLoRaTP() const { return LoRaTP; }
     Hz getLoRaCF() const { return LoRaCF; }
